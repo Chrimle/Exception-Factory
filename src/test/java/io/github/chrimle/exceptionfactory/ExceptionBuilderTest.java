@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class ExceptionBuilderTest {
@@ -38,5 +39,32 @@ class ExceptionBuilderTest {
     final var exception = assertDoesNotThrow(exceptionBuilder::build);
     assertNotNull(exception);
     assertEquals(exceptionToBuild, exception.getClass());
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"", "test"})
+  @NullSource
+  void testSetMessageMethod(final String message) {
+    final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+    assertDoesNotThrow(() -> exceptionBuilder.setMessage(message));
+    final var exception = assertDoesNotThrow(exceptionBuilder::build);
+    assertEquals(message, exception.getMessage());
+  }
+
+  @Test
+  void testSetCauseMethodNull() {
+    final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+    assertDoesNotThrow(() -> exceptionBuilder.setCause(null));
+    final var exception = assertDoesNotThrow(exceptionBuilder::build);
+    assertNull(exception.getCause());
+  }
+
+  @Test
+  void testSetCauseMethod() {
+    final var cause = new Exception("testSetCauseMethod");
+    final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+    assertDoesNotThrow(() -> exceptionBuilder.setCause(cause));
+    final var exception = assertDoesNotThrow(exceptionBuilder::build);
+    assertEquals(cause, exception.getCause());
   }
 }
