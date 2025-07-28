@@ -107,22 +107,22 @@ class ExceptionBuilderTest {
     }
 
     @Nested
-    class MessageTemplateTests {
+    class FormattedStringTests {
 
       @Test
-      void testNullMessageTemplate() {
+      void testNull() {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
         final var exception =
             assertThrows(
                 IllegalArgumentException.class,
                 () -> exceptionBuilder.setMessage((String) null, "irrelevant", "also irrelevant"));
-        assertEquals("`messageTemplate` MUST NOT be `null`", exception.getMessage());
+        assertEquals("`formattedString` MUST NOT be `null`", exception.getMessage());
       }
 
       @ParameterizedTest
       @ValueSource(strings = {"", "test"})
       @NullSource
-      void testMessageTemplateOneArg(final String messageArg) {
+      void testOneArg(final String messageArg) {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
         assertDoesNotThrow(() -> exceptionBuilder.setMessage("this is a %s", messageArg));
         final var exception = assertDoesNotThrow(exceptionBuilder::build);
@@ -132,7 +132,7 @@ class ExceptionBuilderTest {
       @ParameterizedTest
       @ValueSource(strings = {"", "test"})
       @NullSource
-      void testMessageTemplateTwoArgs(final String messageArg) {
+      void testTwoArgs(final String messageArg) {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
         assertDoesNotThrow(
             () -> exceptionBuilder.setMessage("this is a %s %s", messageArg, messageArg));
