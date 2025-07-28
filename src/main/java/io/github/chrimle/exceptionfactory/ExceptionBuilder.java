@@ -1,6 +1,8 @@
 package io.github.chrimle.exceptionfactory;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.function.BiFunction;
+import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,6 +90,70 @@ public final class ExceptionBuilder<T extends Exception> {
   @Contract(value = "_ -> this", mutates = "this")
   public ExceptionBuilder<T> setMessage(@Nullable final String message) {
     this.message = message;
+    return this;
+  }
+
+  /**
+   * Sets the {@code message} to be used when instantiating {@link T}, by invoking {@code
+   * messageBuilder} with {@code messageArg}.
+   *
+   * @param messageBuilder to invoke. <strong>MUST NOT</strong> be {@code null}.
+   * @param messageArg to invoke with. <strong>MAY</strong> be {@code null}.
+   * @since 0.1.0
+   * @return <em>this</em> {@link ExceptionBuilder}.
+   * @throws IllegalArgumentException if {@code messageBuilder} is {@code null}.
+   */
+  @Contract("null, _ -> fail; _, _ -> this")
+  public ExceptionBuilder<T> setMessage(
+      final UnaryOperator<String> messageBuilder, @Nullable final String messageArg) {
+    if (messageBuilder == null) {
+      throw new IllegalArgumentException("`messageBuilder` MUST NOT be `null`");
+    }
+    this.message = messageBuilder.apply(messageArg);
+    return this;
+  }
+
+  /**
+   * Sets the {@code message} to be used when instantiating {@link T}, by invoking {@code
+   * messageBuilder} with {@code messageArg1} and {@code messageArg2}.
+   *
+   * @param messageBuilder to invoke. <strong>MUST NOT</strong> be {@code null}.
+   * @param messageArg1 to invoke with. <strong>MAY</strong> be {@code null}.
+   * @param messageArg2 to invoke with. <strong>MAY</strong> be {@code null}.
+   * @return <em>this</em> {@link ExceptionBuilder}.
+   * @since 0.1.0
+   * @throws IllegalArgumentException if {@code messageBuilder} is {@code null}.
+   */
+  @Contract("null, _, _ -> fail; _, _, _ -> this")
+  public ExceptionBuilder<T> setMessage(
+      final BiFunction<String, String, String> messageBuilder,
+      @Nullable final String messageArg1,
+      @Nullable final String messageArg2) {
+    if (messageBuilder == null) {
+      throw new IllegalArgumentException("`messageBuilder` MUST NOT be `null`");
+    }
+    this.message = messageBuilder.apply(messageArg1, messageArg2);
+    return this;
+  }
+
+  /**
+   * Sets the {@code message} to be used when instantiating {@link T}, by <em>formatting</em> {@code
+   * messageTemplate} with the <em>format specifiers</em> {@code messageArgs}.
+   *
+   * @see String#formatted(Object...)
+   * @param messageTemplate to be <em>formatted</em>. <strong>MUST</strong> conform to {@link
+   *     String#formatted(Object...)}.
+   * @param messageArgs to be used as <em>format specifiers</em>.
+   * @return <em>this</em> {@link ExceptionBuilder}.
+   * @since 0.1.0
+   * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   */
+  @Contract("null, _ -> fail; _, _ -> this")
+  public ExceptionBuilder<T> setMessage(final String messageTemplate, final String... messageArgs) {
+    if (messageTemplate == null) {
+      throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
+    }
+    this.message = messageTemplate.formatted((Object[]) messageArgs);
     return this;
   }
 
