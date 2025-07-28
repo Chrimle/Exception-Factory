@@ -108,6 +108,17 @@ public final class MessageTemplates {
     }
 
     /**
+     * Returns the {@code template} of this constant.
+     *
+     * @return the {@code template}.
+     * @since 0.1.0
+     */
+    @Contract(pure = true)
+    public String getTemplate() {
+      return template;
+    }
+
+    /**
      * Creates a <em>formatted</em> {@code String} from the {@code template} and {@code arg}.
      *
      * @param arg to be used as a <em>template specifier</em>.
@@ -196,6 +207,17 @@ public final class MessageTemplates {
 
     TwoArgTemplate(final String template) {
       this.template = template;
+    }
+
+    /**
+     * Returns the {@code template} of this constant.
+     *
+     * @return the {@code template}.
+     * @since 0.1.0
+     */
+    @Contract(pure = true)
+    public String getTemplate() {
+      return template;
     }
 
     /**
