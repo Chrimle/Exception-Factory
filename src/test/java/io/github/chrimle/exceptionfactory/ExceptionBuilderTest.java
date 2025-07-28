@@ -2,9 +2,12 @@ package io.github.chrimle.exceptionfactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.function.BiFunction;
+import java.util.function.UnaryOperator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -75,7 +78,7 @@ class ExceptionBuilderTest {
         final var exception =
             assertThrows(
                 IllegalArgumentException.class,
-                () -> exceptionBuilder.setMessage(null, "irrelevant"));
+                () -> exceptionBuilder.setMessage((UnaryOperator<String>) null, "irrelevant"));
         assertEquals("`messageBuilder` MUST NOT be `null`", exception.getMessage());
       }
     }
@@ -101,28 +104,32 @@ class ExceptionBuilderTest {
         final var exception =
             assertThrows(
                 IllegalArgumentException.class,
-                () -> exceptionBuilder.setMessage(null, "irrelevant", "also irrelevant"));
+                () ->
+                    exceptionBuilder.setMessage(
+                        (BiFunction<String, String, String>) null,
+                        "irrelevant",
+                        "also irrelevant"));
         assertEquals("`messageBuilder` MUST NOT be `null`", exception.getMessage());
       }
     }
 
     @Nested
-    class MessageTemplateTests {
+    class FormattedStringTests {
 
       @Test
-      void testNullMessageTemplate() {
+      void testNull() {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
         final var exception =
             assertThrows(
                 IllegalArgumentException.class,
                 () -> exceptionBuilder.setMessage((String) null, "irrelevant", "also irrelevant"));
-        assertEquals("`messageTemplate` MUST NOT be `null`", exception.getMessage());
+        assertEquals("`formattedString` MUST NOT be `null`", exception.getMessage());
       }
 
       @ParameterizedTest
       @ValueSource(strings = {"", "test"})
       @NullSource
-      void testMessageTemplateOneArg(final String messageArg) {
+      void testOneArg(final String messageArg) {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
         assertDoesNotThrow(() -> exceptionBuilder.setMessage("this is a %s", messageArg));
         final var exception = assertDoesNotThrow(exceptionBuilder::build);
@@ -132,12 +139,67 @@ class ExceptionBuilderTest {
       @ParameterizedTest
       @ValueSource(strings = {"", "test"})
       @NullSource
-      void testMessageTemplateTwoArgs(final String messageArg) {
+      void testTwoArgs(final String messageArg) {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
         assertDoesNotThrow(
             () -> exceptionBuilder.setMessage("this is a %s %s", messageArg, messageArg));
         final var exception = assertDoesNotThrow(exceptionBuilder::build);
         assertEquals("this is a %s %s".formatted(messageArg, messageArg), exception.getMessage());
+      }
+    }
+
+    @Nested
+    class MessageTemplateTests {
+
+      @Nested
+      class OneArgTests {
+
+        @Test
+        void testNull() {
+          final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+          final var exception =
+              assertThrows(
+                  IllegalArgumentException.class,
+                  () ->
+                      exceptionBuilder.setMessage(
+                          (MessageTemplates.OneArgTemplate) null, "irrelevant"));
+          assertEquals("`messageTemplate` MUST NOT be `null`", exception.getMessage());
+        }
+
+        @ParameterizedTest
+        @EnumSource(MessageTemplates.OneArgTemplate.class)
+        void testOneArgs(final MessageTemplates.OneArgTemplate oneArgTemplate) {
+          final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+          assertDoesNotThrow(() -> exceptionBuilder.setMessage(oneArgTemplate, "test"));
+          final var exception = assertDoesNotThrow(exceptionBuilder::build);
+          assertEquals(oneArgTemplate.getTemplate().formatted("test"), exception.getMessage());
+        }
+      }
+
+      @Nested
+      class TwoArgTests {
+
+        @Test
+        void testNull() {
+          final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+          final var exception =
+              assertThrows(
+                  IllegalArgumentException.class,
+                  () ->
+                      exceptionBuilder.setMessage(
+                          (MessageTemplates.TwoArgTemplate) null, "irrelevant", "also irrelevant"));
+          assertEquals("`messageTemplate` MUST NOT be `null`", exception.getMessage());
+        }
+
+        @ParameterizedTest
+        @EnumSource(MessageTemplates.TwoArgTemplate.class)
+        void testTwoArgs(final MessageTemplates.TwoArgTemplate twoArgTemplate) {
+          final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+          assertDoesNotThrow(() -> exceptionBuilder.setMessage(twoArgTemplate, "test1", "test2"));
+          final var exception = assertDoesNotThrow(exceptionBuilder::build);
+          assertEquals(
+              twoArgTemplate.getTemplate().formatted("test1", "test2"), exception.getMessage());
+        }
       }
     }
   }

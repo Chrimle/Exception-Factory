@@ -138,22 +138,65 @@ public final class ExceptionBuilder<T extends Exception> {
 
   /**
    * Sets the {@code message} to be used when instantiating {@link T}, by <em>formatting</em> {@code
-   * messageTemplate} with the <em>format specifiers</em> {@code messageArgs}.
+   * formattedString} with the <em>format specifiers</em> {@code messageArgs}.
    *
    * @see String#formatted(Object...)
-   * @param messageTemplate to be <em>formatted</em>. <strong>MUST</strong> conform to {@link
+   * @param formattedString to be <em>formatted</em>. <strong>MUST</strong> conform to {@link
    *     String#formatted(Object...)}.
    * @param messageArgs to be used as <em>format specifiers</em>.
    * @return <em>this</em> {@link ExceptionBuilder}.
    * @since 0.1.0
-   * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   * @throws IllegalArgumentException if {@code formattedString} is {@code null}.
    */
   @Contract("null, _ -> fail; _, _ -> this")
-  public ExceptionBuilder<T> setMessage(final String messageTemplate, final String... messageArgs) {
+  public ExceptionBuilder<T> setMessage(final String formattedString, final String... messageArgs) {
+    if (formattedString == null) {
+      throw new IllegalArgumentException("`formattedString` MUST NOT be `null`");
+    }
+    this.message = formattedString.formatted((Object[]) messageArgs);
+    return this;
+  }
+
+  /**
+   * Sets the {@code message} to be used when instantiating {@link T}, by applying the {@code
+   * messageArg} to the {@code messageTemplate}.
+   *
+   * @param messageTemplate to use.
+   * @param messageArg to be supplied to the {@code messageTemplate}.
+   * @return <em>this</em> {@link ExceptionBuilder}.
+   * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   * @since 0.1.0
+   */
+  @Contract("null, _ -> fail; _, _ -> this")
+  public ExceptionBuilder<T> setMessage(
+      final MessageTemplates.OneArgTemplate messageTemplate, final String messageArg) {
     if (messageTemplate == null) {
       throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
     }
-    this.message = messageTemplate.formatted((Object[]) messageArgs);
+    this.message = messageTemplate.format(messageArg);
+    return this;
+  }
+
+  /**
+   * Sets the {@code message} to be used when instantiating {@link T}, by applying the {@code
+   * messageArgOne} and {@code messageArgTwo} to the {@code messageTemplate}.
+   *
+   * @param messageTemplate to use.
+   * @param messageArgOne to be supplied to the {@code messageTemplate}.
+   * @param messageArgTwo to be supplied to the {@code messageTemplate}.
+   * @return <em>this</em> {@link ExceptionBuilder}.
+   * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   * @since 0.1.0
+   */
+  @Contract("null, _, _ -> fail; _, _, _ -> this")
+  public ExceptionBuilder<T> setMessage(
+      final MessageTemplates.TwoArgTemplate messageTemplate,
+      final String messageArgOne,
+      final String messageArgTwo) {
+    if (messageTemplate == null) {
+      throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
+    }
+    this.message = messageTemplate.format(messageArgOne, messageArgTwo);
     return this;
   }
 
