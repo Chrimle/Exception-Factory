@@ -119,4 +119,96 @@ public final class MessageTemplates {
       return String.format(template, arg);
     }
   }
+
+  /**
+   * Template requiring <strong>TWO</strong> <em>template specifiers</em> to format a message.
+   *
+   * @since 0.1.0
+   * @author Chrimle
+   */
+  public enum TwoArgTemplate {
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST be at least `42`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_BE_AT_LEAST("`%s` MUST be at least `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST be at most `42`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_BE_AT_MOST("`%s` MUST be at most `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST be greater than `42`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_BE_GREATER_THAN("`%s` MUST be greater than `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST be less than `42`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_BE_LESS_THAN("`%s` MUST be less than `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST contain `ex`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_CONTAIN("`%s` MUST contain `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST match RegEx `.*`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_MATCH_REGEX("`%s` MUST match RegEx `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST NOT be equal to `example`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_NOT_BE_EQUAL_TO("`%s` MUST NOT be equal to `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST NOT contain `ex`"}</pre>
+     *
+     * @since 0.1.0
+     */
+    MUST_NOT_CONTAIN("`%s` MUST NOT contain `%s`");
+
+    private final String template;
+
+    TwoArgTemplate(final String template) {
+      this.template = template;
+    }
+
+    /**
+     * Creates a <em>formatted</em> {@code String} from the {@code template} and {@code arg}.
+     *
+     * @param argOne to be used as the first <em>template specifier</em>.
+     * @param argTwo to be used as the second <em>template specifier</em>.
+     * @return the formatted String.
+     * @since 0.1.0
+     */
+    @Contract(pure = true)
+    public @NotNull String format(final String argOne, final String argTwo) {
+      return String.format(template, argOne, argTwo);
+    }
+  }
 }
