@@ -127,8 +127,11 @@ public final class ExceptionBuilder<T extends Exception> {
   @Contract("null, _, _ -> fail; _, _, _ -> this")
   public ExceptionBuilder<T> setMessage(
       final BiFunction<String, String, String> messageBuilder,
-      final String messageArg1,
-      final String messageArg2) {
+      @Nullable final String messageArg1,
+      @Nullable final String messageArg2) {
+    if (messageBuilder == null) {
+      throw new IllegalArgumentException("`messageBuilder` MUST NOT be `null`");
+    }
     this.message = messageBuilder.apply(messageArg1, messageArg2);
     return this;
   }
