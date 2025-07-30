@@ -87,11 +87,27 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
+     * <pre>{@code "`example` MUST NOT be negative"}</pre>
+     *
+     * @since 0.2.0
+     */
+    MUST_NOT_BE_NEGATIVE("`%s` MUST NOT be negative"),
+    /**
+     * <strong>Example:</strong>
+     *
      * <pre>{@code "`example` MUST NOT be `null`"}</pre>
      *
      * @since 0.1.0
      */
     MUST_NOT_BE_NULL("`%s` MUST NOT be `null`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST NOT be positive"}</pre>
+     *
+     * @since 0.2.0
+     */
+    MUST_NOT_BE_POSITIVE("`%s` MUST NOT be positive"),
     /**
      * <strong>Example:</strong>
      *
