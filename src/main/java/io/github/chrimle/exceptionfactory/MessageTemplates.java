@@ -173,6 +173,15 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
+     * <pre>{@code "`actual` MUST be equal to `expected`"}</pre>
+     *
+     * @see #MUST_NOT_BE_EQUAL_TO
+     * @since 0.2.0
+     */
+    MUST_BE_EQUAL_TO("`%s` MUST be equal to `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
      * <pre>{@code "`example` MUST be greater than `42`"}</pre>
      *
      * @since 0.1.0
@@ -181,11 +190,36 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
+     * <pre>{@code "`example` MUST be an instance of `ExampleClass`"}</pre>
+     *
+     * @see #MUST_NOT_BE_INSTANCE_OF
+     * @since 0.2.0
+     */
+    MUST_BE_INSTANCE_OF("`%s` MUST be an instance of `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
      * <pre>{@code "`example` MUST be less than `42`"}</pre>
      *
      * @since 0.1.0
      */
     MUST_BE_LESS_THAN("`%s` MUST be less than `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST be of length `42`"}</pre>
+     *
+     * @since 0.2.0
+     */
+    MUST_BE_OF_LENGTH("`%s` MUST be of length `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST be of size `42`"}</pre>
+     *
+     * @since 0.2.0
+     */
+    MUST_BE_OF_SIZE("`%s` MUST be of size `%s`"),
     /**
      * <strong>Example:</strong>
      *
@@ -210,6 +244,15 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_NOT_BE_EQUAL_TO("`%s` MUST NOT be equal to `%s`"),
+    /**
+     * <strong>Example:</strong>
+     *
+     * <pre>{@code "`example` MUST NOT be an instance of `ExampleClass`"}</pre>
+     *
+     * @see #MUST_BE_INSTANCE_OF
+     * @since 0.2.0
+     */
+    MUST_NOT_BE_INSTANCE_OF("`%s` MUST NOT be an instance of `%s`"),
     /**
      * <strong>Example:</strong>
      *
