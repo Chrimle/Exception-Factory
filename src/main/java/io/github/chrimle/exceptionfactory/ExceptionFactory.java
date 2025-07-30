@@ -7,7 +7,21 @@ import org.jetbrains.annotations.Nullable;
 /**
  * <em>Factory</em> of {@link Exception}s and <em>sub-classes</em>.
  *
+ * <p><strong>Example Usage</strong>
+ *
+ * <p>Using {@link MessageTemplates.OneArgTemplate}:
+ *
+ * <pre>{@code
+ * ExceptionFactory.illegalArgumentOf("username", MUST_NOT_BE_NULL);
+ * }</pre>
+ *
+ * Creates a {@link IllegalArgumentException} with a {@code message} as {@code "`username` MUST NOT
+ * be `null`"}.
+ *
+ * <p><em>To provide a {@code cause}, use {@link ExceptionBuilder}.</em>
+ *
  * @see ExceptionBuilder
+ * @see MessageTemplates
  * @author Chrimle
  * @since 0.1.0
  */
