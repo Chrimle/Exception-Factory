@@ -44,6 +44,7 @@ public final class ExceptionFactory {
    * @param messageTemplate to create the {@code message}.
    * @return a new {@link IllegalArgumentException} instance.
    * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   * @since 0.1.0
    */
   @Contract("_, null -> fail; _, _ -> new")
   public static @NotNull IllegalArgumentException illegalArgumentOf(
@@ -60,6 +61,7 @@ public final class ExceptionFactory {
    * @param value to include in the {@code messageTemplate}.
    * @return a new {@link IllegalArgumentException} instance.
    * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   * @since 0.1.0
    */
   @Contract("_, null, _ -> fail; _, _, _ -> new")
   public static @NotNull IllegalArgumentException illegalArgumentOf(
@@ -77,6 +79,7 @@ public final class ExceptionFactory {
    * @param messageTemplate to create the {@code message}.
    * @return a new {@link IllegalStateException} instance.
    * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   * @since 0.1.0
    */
   @Contract("_, null -> fail; _, _ -> new")
   public static @NotNull IllegalStateException illegalStateOf(
@@ -93,6 +96,7 @@ public final class ExceptionFactory {
    * @param value to include in the {@code messageTemplate}.
    * @return a new {@link IllegalStateException} instance.
    * @throws IllegalArgumentException if {@code messageTemplate} is {@code null}.
+   * @since 0.1.0
    */
   @Contract("_, null, _ -> fail; _, _, _ -> new")
   public static @NotNull IllegalStateException illegalStateOf(
