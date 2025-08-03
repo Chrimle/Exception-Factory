@@ -1,5 +1,8 @@
 package io.github.chrimle.exceptionfactory;
 
+import static io.github.chrimle.exceptionfactory.MessageBuilder.newMessageBuilder;
+import static io.github.chrimle.exceptionfactory.RequirementLevel.*;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Chrimle
  */
 public final class MessageTemplates {
+
+  private static final String BE = "be";
 
   private MessageTemplates() {}
 
@@ -27,7 +32,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_FALSE("`%s` MUST be `false`"),
+    MUST_BE_FALSE(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("`false`")),
     /**
      * <strong>Example:</strong>
      *
@@ -35,7 +41,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_NEGATIVE("`%s` MUST be negative"),
+    MUST_BE_NEGATIVE(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("negative")),
     /**
      * <strong>Example:</strong>
      *
@@ -43,7 +50,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_POSITIVE("`%s` MUST be positive"),
+    MUST_BE_POSITIVE(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("positive")),
     /**
      * <strong>Example:</strong>
      *
@@ -51,7 +59,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_TRUE("`%s` MUST be `true`"),
+    MUST_BE_TRUE(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("`true`")),
     /**
      * <strong>Example:</strong>
      *
@@ -59,7 +68,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_UNIQUE("`%s` MUST be unique"),
+    MUST_BE_UNIQUE(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("unique")),
     /**
      * <strong>Example:</strong>
      *
@@ -67,7 +77,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_VALID("`%s` MUST be valid"),
+    MUST_BE_VALID(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("valid")),
     /**
      * <strong>Example:</strong>
      *
@@ -75,7 +86,7 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_EXIST("`%s` MUST exist"),
+    MUST_EXIST(newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add("exist")),
     /**
      * <strong>Example:</strong>
      *
@@ -83,7 +94,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_NOT_BE_EMPTY("`%s` MUST NOT be empty"),
+    MUST_NOT_BE_EMPTY(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("empty")),
     /**
      * <strong>Example:</strong>
      *
@@ -91,7 +103,8 @@ public final class MessageTemplates {
      *
      * @since 0.2.0
      */
-    MUST_NOT_BE_NEGATIVE("`%s` MUST NOT be negative"),
+    MUST_NOT_BE_NEGATIVE(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("negative")),
     /**
      * <strong>Example:</strong>
      *
@@ -99,7 +112,8 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_NOT_BE_NULL("`%s` MUST NOT be `null`"),
+    MUST_NOT_BE_NULL(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("`null`")),
     /**
      * <strong>Example:</strong>
      *
@@ -107,7 +121,8 @@ public final class MessageTemplates {
      *
      * @since 0.2.0
      */
-    MUST_NOT_BE_POSITIVE("`%s` MUST NOT be positive"),
+    MUST_NOT_BE_POSITIVE(
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("positive")),
     /**
      * <strong>Example:</strong>
      *
@@ -115,12 +130,12 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_NOT_EXIST("`%s` MUST NOT exist");
+    MUST_NOT_EXIST(newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add("exist"));
 
     private final String template;
 
-    OneArgTemplate(final String template) {
-      this.template = template;
+    OneArgTemplate(final MessageBuilder messageBuilder) {
+      this.template = messageBuilder.toString();
     }
 
     /**
