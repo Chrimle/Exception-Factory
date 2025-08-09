@@ -15,6 +15,25 @@ import org.jetbrains.annotations.NotNull;
 public final class MessageTemplates {
 
   private static final String BE = "be";
+  private static final String AT_LEAST = "at least";
+  private static final String EXIST = "exist";
+  private static final String POSITIVE = "positive";
+  private static final String NEGATIVE = "negative";
+  private static final String EMPTY = "empty";
+  private static final String VALID = "valid";
+  private static final String UNIQUE = "unique";
+  private static final String TRUE = "true";
+  private static final String FALSE = "false";
+  private static final String AT_MOST = "at most";
+  private static final String NULL = "null";
+  private static final String EQUAL_TO = "equal to";
+  private static final String GREATER_THAN = "greater than";
+  private static final String AN_INSTANCE_OF = "an instance of";
+  private static final String LESS_THAN = "less than";
+  private static final String OF_LENGTH = "of length";
+  private static final String OF_SIZE = "of size";
+  private static final String CONTAIN = "contain";
+  private static final String MATCH_REG_EX = "match RegEx";
 
   private MessageTemplates() {}
 
@@ -33,7 +52,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_BE_FALSE(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("`false`")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).addCodeQuote(FALSE)),
     /**
      * <strong>Example:</strong>
      *
@@ -42,7 +61,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_BE_NEGATIVE(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("negative")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add(NEGATIVE)),
     /**
      * <strong>Example:</strong>
      *
@@ -51,7 +70,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_BE_POSITIVE(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("positive")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add(POSITIVE)),
     /**
      * <strong>Example:</strong>
      *
@@ -60,7 +79,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_BE_TRUE(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("`true`")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).addCodeQuote(TRUE)),
     /**
      * <strong>Example:</strong>
      *
@@ -69,7 +88,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_BE_UNIQUE(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("unique")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add(UNIQUE)),
     /**
      * <strong>Example:</strong>
      *
@@ -78,7 +97,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_BE_VALID(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add("valid")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(BE).add(VALID)),
     /**
      * <strong>Example:</strong>
      *
@@ -86,7 +105,7 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_EXIST(newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add("exist")),
+    MUST_EXIST(newMessageBuilder().addFormatSpecifier(String.class).add(MUST).add(EXIST)),
     /**
      * <strong>Example:</strong>
      *
@@ -95,7 +114,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_NOT_BE_EMPTY(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("empty")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add(EMPTY)),
     /**
      * <strong>Example:</strong>
      *
@@ -104,7 +123,7 @@ public final class MessageTemplates {
      * @since 0.2.0
      */
     MUST_NOT_BE_NEGATIVE(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("negative")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add(NEGATIVE)),
     /**
      * <strong>Example:</strong>
      *
@@ -113,7 +132,11 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     MUST_NOT_BE_NULL(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("`null`")),
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST_NOT)
+            .add(BE)
+            .addCodeQuote(NULL)),
     /**
      * <strong>Example:</strong>
      *
@@ -122,7 +145,7 @@ public final class MessageTemplates {
      * @since 0.2.0
      */
     MUST_NOT_BE_POSITIVE(
-        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add("positive")),
+        newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(BE).add(POSITIVE)),
     /**
      * <strong>Example:</strong>
      *
@@ -130,7 +153,7 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_NOT_EXIST(newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add("exist"));
+    MUST_NOT_EXIST(newMessageBuilder().addFormatSpecifier(String.class).add(MUST_NOT).add(EXIST));
 
     private final String template;
 
@@ -176,7 +199,13 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_AT_LEAST("`%s` MUST be at least `%s`"),
+    MUST_BE_AT_LEAST(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(AT_LEAST)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -184,7 +213,13 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_AT_MOST("`%s` MUST be at most `%s`"),
+    MUST_BE_AT_MOST(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(AT_MOST)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -193,7 +228,13 @@ public final class MessageTemplates {
      * @see #MUST_NOT_BE_EQUAL_TO
      * @since 0.2.0
      */
-    MUST_BE_EQUAL_TO("`%s` MUST be equal to `%s`"),
+    MUST_BE_EQUAL_TO(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(EQUAL_TO)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -201,7 +242,13 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_GREATER_THAN("`%s` MUST be greater than `%s`"),
+    MUST_BE_GREATER_THAN(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(GREATER_THAN)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -210,7 +257,13 @@ public final class MessageTemplates {
      * @see #MUST_NOT_BE_INSTANCE_OF
      * @since 0.2.0
      */
-    MUST_BE_INSTANCE_OF("`%s` MUST be an instance of `%s`"),
+    MUST_BE_INSTANCE_OF(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(AN_INSTANCE_OF)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -218,7 +271,13 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_BE_LESS_THAN("`%s` MUST be less than `%s`"),
+    MUST_BE_LESS_THAN(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(LESS_THAN)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -226,7 +285,13 @@ public final class MessageTemplates {
      *
      * @since 0.2.0
      */
-    MUST_BE_OF_LENGTH("`%s` MUST be of length `%s`"),
+    MUST_BE_OF_LENGTH(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(OF_LENGTH)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -234,7 +299,13 @@ public final class MessageTemplates {
      *
      * @since 0.2.0
      */
-    MUST_BE_OF_SIZE("`%s` MUST be of size `%s`"),
+    MUST_BE_OF_SIZE(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(BE)
+            .add(OF_SIZE)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -242,7 +313,12 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_CONTAIN("`%s` MUST contain `%s`"),
+    MUST_CONTAIN(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(CONTAIN)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -250,7 +326,12 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_MATCH_REGEX("`%s` MUST match RegEx `%s`"),
+    MUST_MATCH_REGEX(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST)
+            .add(MATCH_REG_EX)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -258,7 +339,13 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_NOT_BE_EQUAL_TO("`%s` MUST NOT be equal to `%s`"),
+    MUST_NOT_BE_EQUAL_TO(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST_NOT)
+            .add(BE)
+            .add(EQUAL_TO)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -267,7 +354,13 @@ public final class MessageTemplates {
      * @see #MUST_BE_INSTANCE_OF
      * @since 0.2.0
      */
-    MUST_NOT_BE_INSTANCE_OF("`%s` MUST NOT be an instance of `%s`"),
+    MUST_NOT_BE_INSTANCE_OF(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST_NOT)
+            .add(BE)
+            .add(AN_INSTANCE_OF)
+            .addFormatSpecifier(String.class)),
     /**
      * <strong>Example:</strong>
      *
@@ -275,12 +368,17 @@ public final class MessageTemplates {
      *
      * @since 0.1.0
      */
-    MUST_NOT_CONTAIN("`%s` MUST NOT contain `%s`");
+    MUST_NOT_CONTAIN(
+        newMessageBuilder()
+            .addFormatSpecifier(String.class)
+            .add(MUST_NOT)
+            .add(CONTAIN)
+            .addFormatSpecifier(String.class));
 
     private final String template;
 
-    TwoArgTemplate(final String template) {
-      this.template = template;
+    TwoArgTemplate(final MessageBuilder messageBuilder) {
+      this.template = messageBuilder.toString();
     }
 
     /**
