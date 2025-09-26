@@ -47,7 +47,7 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
-     * <pre>{@code "`example` MUST BE `false`"}</pre>
+     * <pre>{@code "`example` MUST be `false`"}</pre>
      *
      * @since 0.1.0
      */
@@ -56,7 +56,7 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
-     * <pre>{@code "`example` MUST BE negative"}</pre>
+     * <pre>{@code "`example` MUST be negative"}</pre>
      *
      * @since 0.1.0
      */
@@ -65,7 +65,7 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
-     * <pre>{@code "`example` MUST BE positive"}</pre>
+     * <pre>{@code "`example` MUST be positive"}</pre>
      *
      * @since 0.1.0
      */
@@ -74,7 +74,7 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
-     * <pre>{@code "`example` MUST BE `true`"}</pre>
+     * <pre>{@code "`example` MUST be `true`"}</pre>
      *
      * @since 0.1.0
      */
@@ -83,7 +83,7 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
-     * <pre>{@code "`example` MUST BE unique"}</pre>
+     * <pre>{@code "`example` MUST be unique"}</pre>
      *
      * @since 0.1.0
      */
@@ -92,7 +92,7 @@ public final class MessageTemplates {
     /**
      * <strong>Example:</strong>
      *
-     * <pre>{@code "`example` MUST BE valid"}</pre>
+     * <pre>{@code "`example` MUST be valid"}</pre>
      *
      * @since 0.1.0
      */
