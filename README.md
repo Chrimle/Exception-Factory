@@ -71,7 +71,7 @@ static {
   } catch (ExceptionalException exception) {
     // Creating an exception with a custom format message string and cause.
     throw ExceptionBuilder.of(IllegalStateException.class)
-        .setMessage("No clue what happened. Time to log everything %s, %s, %s, %s, %s", userId, newUsername, newLanguage, newDescription)
+        .setMessage("No clue what happened. Time to log everything %s, %s, %s, %s", userId, newUsername, newLanguage, newDescription)
         .setCause(exception)
         .build();
   }
