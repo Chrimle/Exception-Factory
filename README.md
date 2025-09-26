@@ -7,7 +7,7 @@
 <dependency>
     <groupId>io.github.chrimle</groupId>
     <artifactId>exception-factory</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
 </dependency>
 ```
 
