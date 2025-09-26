@@ -153,6 +153,10 @@ public enum RequirementLevel {
    * <p>- <a href="https://www.rfc-editor.org/rfc/rfc2119#section-4">RFC 2119 Section 4</a>
    *
    * </blockquote>
+   *
+   * @see #NOT_RECOMMENDED
+   * @see #SHOULD
+   * @since 0.3.0
    */
   SHOULD_NOT;
 
