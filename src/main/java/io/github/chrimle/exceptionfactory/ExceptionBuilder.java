@@ -17,13 +17,13 @@ import org.jetbrains.annotations.Nullable;
 public final class ExceptionBuilder<T extends Exception> {
 
   /** The {@link Exception}-class to build and instantiate. */
-  private @NotNull final Class<T> exceptionClass;
+  @NotNull private final Class<T> exceptionClass;
 
   /** The {@code message} of the {@link Exception}. */
-  private @Nullable String message;
+  @Nullable private String message;
 
   /** The {@code cause} of the {@link Exception}. */
-  private @Nullable Throwable cause;
+  @Nullable private Throwable cause;
 
   /**
    * <em>Private Constructor</em>.
@@ -31,7 +31,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @param exceptionClass for the builder.
    */
   @Contract(pure = true)
-  private ExceptionBuilder(final @NotNull Class<T> exceptionClass) {
+  private ExceptionBuilder(@NotNull final Class<T> exceptionClass) {
     this.exceptionClass = exceptionClass;
   }
 
@@ -50,7 +50,7 @@ public final class ExceptionBuilder<T extends Exception> {
    *     <strong>MUST</strong> have a {@code (String, Throwable)} constructor.
    */
   @Contract("null -> fail; _ -> new")
-  public static <C extends Exception> @NotNull ExceptionBuilder<C> of(
+  public static @NotNull <C extends Exception> ExceptionBuilder<C> of(
       final Class<C> exceptionClass) {
     if (exceptionClass == null) {
       throw new IllegalArgumentException("`exceptionClass` is `null`");
