@@ -70,6 +70,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @since 0.1.0
    */
   @Contract(pure = true)
+  @SuppressWarnings("ReturnValueIgnored")
   private static boolean hasStringAndThrowableConstructor(
       final Class<? extends Exception> exceptionClass) {
     try {
