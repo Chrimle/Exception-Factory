@@ -73,6 +73,8 @@
         <!-- === Dependency Versions === -->
         <junit.version>6.0.1</junit.version>
         <annotations.version>26.0.2</annotations.version>
+        <!-- === Plugin Versions === -->
+        <error_prone_core.version>2.42.0</error_prone_core.version>
     </properties>
 
     <!-- === DependencyManagement === -->
@@ -104,6 +106,24 @@
     <!-- === Build Plugins === -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-XDcompilePolicy=simple</arg>
+                        <arg>--should-stop=ifError=FLOW</arg>
+                        <arg>-Xplugin:ErrorProne</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.google.errorprone</groupId>
+                            <artifactId>error_prone_core</artifactId>
+                            <version>${error_prone_core.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
