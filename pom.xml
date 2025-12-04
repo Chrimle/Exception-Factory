@@ -73,7 +73,7 @@
         <!-- === Dependency Versions === -->
         <annotations.version>26.0.2</annotations.version>
         <!-- === Plugin Versions === -->
-        <error_prone_core.version>2.42.0</error_prone_core.version>
+        <error_prone_core.version>2.45.0</error_prone_core.version>
     </properties>
 
     <!-- === DependencyManagement === -->
