@@ -71,24 +71,14 @@
         <!-- === Spotless === -->
         <spotless.check.skip>false</spotless.check.skip>
         <!-- === Dependency Versions === -->
-        <junit.version>6.0.1</junit.version>
         <annotations.version>26.0.2</annotations.version>
         <!-- === Plugin Versions === -->
         <error_prone_core.version>2.42.0</error_prone_core.version>
     </properties>
 
     <!-- === DependencyManagement === -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${junit.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <dependencyManagement/>
+
     <!-- === Dependencies === -->
     <dependencies>
         <dependency>
