@@ -71,7 +71,7 @@
         <!-- === Spotless === -->
         <spotless.check.skip>false</spotless.check.skip>
         <!-- === Dependency Versions === -->
-        <annotations.version>26.0.2</annotations.version>
+        <annotations.version>26.1.0</annotations.version>
         <!-- === Plugin Versions === -->
     </properties>
 
