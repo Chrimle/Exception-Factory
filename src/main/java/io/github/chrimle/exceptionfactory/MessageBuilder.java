@@ -5,7 +5,7 @@ import static io.github.chrimle.exceptionfactory.MessageTemplates.OneArgTemplate
 import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Builder of <em>message strings</em>.
@@ -25,7 +25,7 @@ public final class MessageBuilder {
    * @since 0.4.0
    */
   @Contract(" -> new")
-  public static @NotNull MessageBuilder newMessageBuilder() {
+  public static @NonNull MessageBuilder newMessageBuilder() {
     return new MessageBuilder();
   }
 

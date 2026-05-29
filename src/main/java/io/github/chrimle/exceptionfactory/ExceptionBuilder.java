@@ -4,8 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * <em>Builder</em> of {@link Exception}s.
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 public final class ExceptionBuilder<T extends Exception> {
 
   /** The {@link Exception}-class to build and instantiate. */
-  @NotNull private final Class<T> exceptionClass;
+  @NonNull private final Class<T> exceptionClass;
 
   /** The {@code message} of the {@link Exception}. */
   @Nullable private String message;
@@ -31,7 +31,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @param exceptionClass for the builder.
    */
   @Contract(pure = true)
-  private ExceptionBuilder(@NotNull final Class<T> exceptionClass) {
+  private ExceptionBuilder(@NonNull final Class<T> exceptionClass) {
     this.exceptionClass = exceptionClass;
   }
 
@@ -50,7 +50,7 @@ public final class ExceptionBuilder<T extends Exception> {
    *     <strong>MUST</strong> have a {@code (String, Throwable)} constructor.
    */
   @Contract("null -> fail; _ -> new")
-  public static @NotNull <C extends Exception> ExceptionBuilder<C> of(
+  public static @NonNull <C extends Exception> ExceptionBuilder<C> of(
       final Class<C> exceptionClass) {
     if (exceptionClass == null) {
       throw new IllegalArgumentException("`exceptionClass` is `null`");
@@ -222,7 +222,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @since 0.1.0
    */
   @Contract(" -> new")
-  public @NotNull T build() {
+  public @NonNull T build() {
     try {
       return exceptionClass
           .getDeclaredConstructor(String.class, Throwable.class)
