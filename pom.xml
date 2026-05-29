@@ -13,7 +13,7 @@
 
     <!-- === Project Coordinates === -->
     <artifactId>exception-factory</artifactId>
-    <version>0.4.1</version>
+    <version>0.5.0</version>
     <packaging>jar</packaging>
 
     <!-- === Project Metadata === -->
