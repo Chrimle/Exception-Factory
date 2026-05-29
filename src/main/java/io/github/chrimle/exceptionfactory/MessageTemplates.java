@@ -4,7 +4,7 @@ import static io.github.chrimle.exceptionfactory.MessageBuilder.newMessageBuilde
 import static io.github.chrimle.exceptionfactory.RequirementLevel.*;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * A collection of <em>preset message-templates</em>.
@@ -180,7 +180,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     @Contract(pure = true)
-    public @NotNull String format(final String arg) {
+    public @NonNull String format(final String arg) {
       return String.format(template, arg);
     }
   }
@@ -401,7 +401,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     @Contract(pure = true)
-    public @NotNull String format(final String argOne, final String argTwo) {
+    public @NonNull String format(final String argOne, final String argTwo) {
       return String.format(template, argOne, argTwo);
     }
   }

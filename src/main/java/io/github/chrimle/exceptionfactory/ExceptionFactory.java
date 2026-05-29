@@ -1,8 +1,8 @@
 package io.github.chrimle.exceptionfactory;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * <em>Factory</em> of {@link Exception}s and <em>sub-classes</em>.
@@ -61,7 +61,7 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null -> fail; _, _ -> new")
-  public static @NotNull IllegalArgumentException illegalArgumentOf(
+  public static @NonNull IllegalArgumentException illegalArgumentOf(
       @Nullable final String key, final MessageTemplates.OneArgTemplate messageTemplate) {
     return exceptionOf(IllegalArgumentException.class, key, messageTemplate);
   }
@@ -78,7 +78,7 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null, _ -> fail; _, _, _ -> new")
-  public static @NotNull IllegalArgumentException illegalArgumentOf(
+  public static @NonNull IllegalArgumentException illegalArgumentOf(
       @Nullable final String key,
       final MessageTemplates.TwoArgTemplate messageTemplate,
       @Nullable final String value) {
@@ -96,7 +96,7 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null -> fail; _, _ -> new")
-  public static @NotNull IllegalStateException illegalStateOf(
+  public static @NonNull IllegalStateException illegalStateOf(
       @Nullable final String key, final MessageTemplates.OneArgTemplate messageTemplate) {
     return exceptionOf(IllegalStateException.class, key, messageTemplate);
   }
@@ -113,7 +113,7 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null, _ -> fail; _, _, _ -> new")
-  public static @NotNull IllegalStateException illegalStateOf(
+  public static @NonNull IllegalStateException illegalStateOf(
       @Nullable final String key,
       final MessageTemplates.TwoArgTemplate messageTemplate,
       @Nullable final String value) {
