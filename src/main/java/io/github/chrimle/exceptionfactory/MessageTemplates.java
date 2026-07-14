@@ -4,7 +4,8 @@ import static io.github.chrimle.exceptionfactory.MessageBuilder.newMessageBuilde
 import static io.github.chrimle.exceptionfactory.RequirementLevel.*;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A collection of <em>preset message-templates</em>.
@@ -12,6 +13,7 @@ import org.jspecify.annotations.NonNull;
  * @since 0.1.0
  * @author Chrimle
  */
+@NullMarked
 public final class MessageTemplates {
 
   private static final String BE = "be";
@@ -180,7 +182,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     @Contract(pure = true)
-    public @NonNull String format(final String arg) {
+    public String format(final @Nullable String arg) {
       return String.format(template, arg);
     }
   }
@@ -401,7 +403,7 @@ public final class MessageTemplates {
      * @since 0.1.0
      */
     @Contract(pure = true)
-    public @NonNull String format(final String argOne, final String argTwo) {
+    public String format(final @Nullable String argOne, final @Nullable String argTwo) {
       return String.format(template, argOne, argTwo);
     }
   }
