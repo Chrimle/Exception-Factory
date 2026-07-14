@@ -15,6 +15,7 @@ class ExceptionBuilderTest {
 
   @Test
   void testNullClass() {
+    @SuppressWarnings({"DataFlowIssue", "NullAway"})
     final var exception =
         assertThrows(IllegalArgumentException.class, () -> ExceptionBuilder.of(null));
     assertEquals("`exceptionClass` is `null`", exception.getMessage());
@@ -75,6 +76,7 @@ class ExceptionBuilderTest {
       @Test
       void testNullUnaryOperator() {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+        @SuppressWarnings({"DataFlowIssue", "NullAway"})
         final var exception =
             assertThrows(
                 IllegalArgumentException.class,
@@ -101,6 +103,7 @@ class ExceptionBuilderTest {
       @Test
       void testNullBiFunction() {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+        @SuppressWarnings({"DataFlowIssue", "NullAway"})
         final var exception =
             assertThrows(
                 IllegalArgumentException.class,
@@ -119,6 +122,7 @@ class ExceptionBuilderTest {
       @Test
       void testNull() {
         final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+        @SuppressWarnings({"DataFlowIssue", "NullAway"})
         final var exception =
             assertThrows(
                 IllegalArgumentException.class,
@@ -157,6 +161,7 @@ class ExceptionBuilderTest {
         @Test
         void testNull() {
           final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+          @SuppressWarnings({"DataFlowIssue", "NullAway"})
           final var exception =
               assertThrows(
                   IllegalArgumentException.class,
@@ -182,6 +187,7 @@ class ExceptionBuilderTest {
         @Test
         void testNull() {
           final var exceptionBuilder = ExceptionBuilder.of(Exception.class);
+          @SuppressWarnings({"DataFlowIssue", "NullAway"})
           final var exception =
               assertThrows(
                   IllegalArgumentException.class,
