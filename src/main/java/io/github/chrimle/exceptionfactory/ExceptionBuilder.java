@@ -1,10 +1,12 @@
 package io.github.chrimle.exceptionfactory;
 
+import static io.github.chrimle.exceptionfactory.MessageTemplates.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -14,16 +16,17 @@ import org.jspecify.annotations.Nullable;
  * @since 0.1.0
  * @author Chrimle
  */
+@NullMarked
 public final class ExceptionBuilder<T extends Exception> {
 
   /** The {@link Exception}-class to build and instantiate. */
-  @NonNull private final Class<T> exceptionClass;
+  private final Class<T> exceptionClass;
 
   /** The {@code message} of the {@link Exception}. */
-  @Nullable private String message;
+  private @Nullable String message;
 
   /** The {@code cause} of the {@link Exception}. */
-  @Nullable private Throwable cause;
+  private @Nullable Throwable cause;
 
   /**
    * <em>Private Constructor</em>.
@@ -31,7 +34,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @param exceptionClass for the builder.
    */
   @Contract(pure = true)
-  private ExceptionBuilder(@NonNull final Class<T> exceptionClass) {
+  private ExceptionBuilder(final Class<T> exceptionClass) {
     this.exceptionClass = exceptionClass;
   }
 
@@ -50,8 +53,8 @@ public final class ExceptionBuilder<T extends Exception> {
    *     <strong>MUST</strong> have a {@code (String, Throwable)} constructor.
    */
   @Contract("null -> fail; _ -> new")
-  public static @NonNull <C extends Exception> ExceptionBuilder<C> of(
-      final Class<C> exceptionClass) {
+  @SuppressWarnings({"ConstantValue", "Contract"})
+  public static <C extends Exception> ExceptionBuilder<C> of(final Class<C> exceptionClass) {
     if (exceptionClass == null) {
       throw new IllegalArgumentException("`exceptionClass` is `null`");
     }
@@ -89,7 +92,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @since 0.1.0
    */
   @Contract(value = "_ -> this", mutates = "this")
-  public ExceptionBuilder<T> setMessage(@Nullable final String message) {
+  public ExceptionBuilder<T> setMessage(final @Nullable String message) {
     this.message = message;
     return this;
   }
@@ -105,8 +108,9 @@ public final class ExceptionBuilder<T extends Exception> {
    * @throws IllegalArgumentException if {@code messageBuilder} is {@code null}.
    */
   @Contract("null, _ -> fail; _, _ -> this")
+  @SuppressWarnings({"ConstantValue", "Contract"})
   public ExceptionBuilder<T> setMessage(
-      final UnaryOperator<String> messageBuilder, @Nullable final String messageArg) {
+      final UnaryOperator<@Nullable String> messageBuilder, final @Nullable String messageArg) {
     if (messageBuilder == null) {
       throw new IllegalArgumentException("`messageBuilder` MUST NOT be `null`");
     }
@@ -126,10 +130,11 @@ public final class ExceptionBuilder<T extends Exception> {
    * @throws IllegalArgumentException if {@code messageBuilder} is {@code null}.
    */
   @Contract("null, _, _ -> fail; _, _, _ -> this")
+  @SuppressWarnings({"ConstantValue", "Contract"})
   public ExceptionBuilder<T> setMessage(
-      final BiFunction<String, String, String> messageBuilder,
-      @Nullable final String messageArg1,
-      @Nullable final String messageArg2) {
+      final BiFunction<@Nullable String, @Nullable String, @Nullable String> messageBuilder,
+      final @Nullable String messageArg1,
+      final @Nullable String messageArg2) {
     if (messageBuilder == null) {
       throw new IllegalArgumentException("`messageBuilder` MUST NOT be `null`");
     }
@@ -150,7 +155,9 @@ public final class ExceptionBuilder<T extends Exception> {
    * @throws IllegalArgumentException if {@code formattedString} is {@code null}.
    */
   @Contract("null, _ -> fail; _, _ -> this")
-  public ExceptionBuilder<T> setMessage(final String formattedString, final String... messageArgs) {
+  @SuppressWarnings({"ConstantValue", "Contract"})
+  public ExceptionBuilder<T> setMessage(
+      final String formattedString, final @Nullable String @Nullable ... messageArgs) {
     if (formattedString == null) {
       throw new IllegalArgumentException("`formattedString` MUST NOT be `null`");
     }
@@ -169,8 +176,9 @@ public final class ExceptionBuilder<T extends Exception> {
    * @since 0.1.0
    */
   @Contract("null, _ -> fail; _, _ -> this")
+  @SuppressWarnings({"ConstantValue", "Contract"})
   public ExceptionBuilder<T> setMessage(
-      final MessageTemplates.OneArgTemplate messageTemplate, final String messageArg) {
+      final OneArgTemplate messageTemplate, final @Nullable String messageArg) {
     if (messageTemplate == null) {
       throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
     }
@@ -190,10 +198,11 @@ public final class ExceptionBuilder<T extends Exception> {
    * @since 0.1.0
    */
   @Contract("null, _, _ -> fail; _, _, _ -> this")
+  @SuppressWarnings({"ConstantValue", "Contract"})
   public ExceptionBuilder<T> setMessage(
-      final MessageTemplates.TwoArgTemplate messageTemplate,
-      final String messageArgOne,
-      final String messageArgTwo) {
+      final TwoArgTemplate messageTemplate,
+      final @Nullable String messageArgOne,
+      final @Nullable String messageArgTwo) {
     if (messageTemplate == null) {
       throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
     }
@@ -209,7 +218,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @since 0.1.0
    */
   @Contract(value = "_ -> this", mutates = "this")
-  public ExceptionBuilder<T> setCause(@Nullable final Throwable cause) {
+  public ExceptionBuilder<T> setCause(final @Nullable Throwable cause) {
     this.cause = cause;
     return this;
   }
@@ -222,7 +231,7 @@ public final class ExceptionBuilder<T extends Exception> {
    * @since 0.1.0
    */
   @Contract(" -> new")
-  public @NonNull T build() {
+  public T build() {
     try {
       return exceptionClass
           .getDeclaredConstructor(String.class, Throwable.class)
