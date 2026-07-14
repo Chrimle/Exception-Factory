@@ -5,7 +5,6 @@ import static io.github.chrimle.exceptionfactory.MessageTemplates.OneArgTemplate
 import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
 
 /**
  * Builder of <em>message strings</em>.
@@ -25,7 +24,7 @@ public final class MessageBuilder {
    * @since 0.4.0
    */
   @Contract(" -> new")
-  public static @NonNull MessageBuilder newMessageBuilder() {
+  public static MessageBuilder newMessageBuilder() {
     return new MessageBuilder();
   }
 
@@ -38,6 +37,7 @@ public final class MessageBuilder {
    * @since 0.4.0
    */
   @Contract("null -> fail; _ -> this")
+  @SuppressWarnings({"ConstantValue", "Contract"})
   public MessageBuilder addFormatSpecifier(final Class<?> formatClass) {
     if (formatClass == null) {
       throw ExceptionFactory.illegalArgumentOf("formatClass", MUST_NOT_BE_NULL);
@@ -61,6 +61,7 @@ public final class MessageBuilder {
    * @since 0.4.0
    */
   @Contract("null -> fail; _ -> this")
+  @SuppressWarnings({"ConstantValue", "Contract"})
   public MessageBuilder addCodeQuote(final Object object) {
     if (object == null) {
       throw ExceptionFactory.illegalArgumentOf("object", MUST_NOT_BE_NULL);
@@ -78,6 +79,7 @@ public final class MessageBuilder {
    * @since 0.4.0
    */
   @Contract("null -> fail; _ -> this")
+  @SuppressWarnings({"ConstantValue", "Contract"})
   public MessageBuilder add(final Object object) {
     if (object == null) {
       throw ExceptionFactory.illegalArgumentOf("object", MUST_NOT_BE_NULL);
