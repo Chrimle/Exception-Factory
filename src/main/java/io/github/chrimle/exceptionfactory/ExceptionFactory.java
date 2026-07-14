@@ -1,7 +1,5 @@
 package io.github.chrimle.exceptionfactory;
 
-import static io.github.chrimle.exceptionfactory.MessageTemplates.*;
-
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -11,7 +9,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p><strong>Example Usage</strong>
  *
- * <p>Using {@link OneArgTemplate}:
+ * <p>Using {@link MessageTemplates.OneArgTemplate}:
  *
  * <pre>{@code
  * ExceptionFactory.illegalArgumentOf("username", MUST_NOT_BE_NULL);
