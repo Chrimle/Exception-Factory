@@ -5,14 +5,12 @@ import static io.github.chrimle.exceptionfactory.MessageTemplates.OneArgTemplate
 import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NullMarked;
 
 /**
  * Builder of <em>message strings</em>.
  *
  * @since 0.4.0
  */
-@NullMarked
 public final class MessageBuilder {
 
   private final List<String> words = new ArrayList<>();

@@ -4,7 +4,6 @@ import static io.github.chrimle.exceptionfactory.MessageBuilder.newMessageBuilde
 import static io.github.chrimle.exceptionfactory.RequirementLevel.*;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -13,7 +12,6 @@ import org.jspecify.annotations.Nullable;
  * @since 0.1.0
  * @author Chrimle
  */
-@NullMarked
 public final class MessageTemplates {
 
   private static final String BE = "be";

@@ -1,7 +1,6 @@
 package io.github.chrimle.exceptionfactory;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -25,7 +24,6 @@ import org.jspecify.annotations.Nullable;
  * @author Chrimle
  * @since 0.1.0
  */
-@NullMarked
 public final class ExceptionFactory {
 
   private ExceptionFactory() {}

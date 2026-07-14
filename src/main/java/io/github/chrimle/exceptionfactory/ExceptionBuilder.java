@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -14,7 +13,6 @@ import org.jspecify.annotations.Nullable;
  * @since 0.1.0
  * @author Chrimle
  */
-@NullMarked
 public final class ExceptionBuilder<T extends Exception> {
 
   /** The {@link Exception}-class to build and instantiate. */
