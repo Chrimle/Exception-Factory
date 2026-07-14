@@ -1,7 +1,5 @@
 package io.github.chrimle.exceptionfactory;
 
-import static io.github.chrimle.exceptionfactory.MessageTemplates.*;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
@@ -178,7 +176,7 @@ public final class ExceptionBuilder<T extends Exception> {
   @Contract("null, _ -> fail; _, _ -> this")
   @SuppressWarnings({"ConstantValue", "Contract"})
   public ExceptionBuilder<T> setMessage(
-      final OneArgTemplate messageTemplate, final @Nullable String messageArg) {
+      final MessageTemplates.OneArgTemplate messageTemplate, final @Nullable String messageArg) {
     if (messageTemplate == null) {
       throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
     }
@@ -200,7 +198,7 @@ public final class ExceptionBuilder<T extends Exception> {
   @Contract("null, _, _ -> fail; _, _, _ -> this")
   @SuppressWarnings({"ConstantValue", "Contract"})
   public ExceptionBuilder<T> setMessage(
-      final TwoArgTemplate messageTemplate,
+      final MessageTemplates.TwoArgTemplate messageTemplate,
       final @Nullable String messageArgOne,
       final @Nullable String messageArgTwo) {
     if (messageTemplate == null) {
