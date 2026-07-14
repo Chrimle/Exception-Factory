@@ -1,7 +1,9 @@
 package io.github.chrimle.exceptionfactory;
 
+import static io.github.chrimle.exceptionfactory.MessageTemplates.*;
+
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -9,7 +11,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p><strong>Example Usage</strong>
  *
- * <p>Using {@link MessageTemplates.OneArgTemplate}:
+ * <p>Using {@link OneArgTemplate}:
  *
  * <pre>{@code
  * ExceptionFactory.illegalArgumentOf("username", MUST_NOT_BE_NULL);
@@ -25,13 +27,15 @@ import org.jspecify.annotations.Nullable;
  * @author Chrimle
  * @since 0.1.0
  */
+@NullMarked
 public final class ExceptionFactory {
 
   private ExceptionFactory() {}
 
+  @SuppressWarnings("ConstantValue")
   private static <C extends Exception> C exceptionOf(
       final Class<C> exceptionClass,
-      @Nullable final String key,
+      final @Nullable String key,
       final MessageTemplates.OneArgTemplate messageTemplate) {
     if (messageTemplate == null) {
       throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
@@ -39,11 +43,12 @@ public final class ExceptionFactory {
     return ExceptionBuilder.of(exceptionClass).setMessage(messageTemplate, key).build();
   }
 
+  @SuppressWarnings("ConstantValue")
   private static <C extends Exception> C exceptionOf(
       final Class<C> exceptionClass,
-      @Nullable final String key,
+      final @Nullable String key,
       final MessageTemplates.TwoArgTemplate messageTemplate,
-      final String value) {
+      final @Nullable String value) {
     if (messageTemplate == null) {
       throw new IllegalArgumentException("`messageTemplate` MUST NOT be `null`");
     }
@@ -61,8 +66,9 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null -> fail; _, _ -> new")
-  public static @NonNull IllegalArgumentException illegalArgumentOf(
-      @Nullable final String key, final MessageTemplates.OneArgTemplate messageTemplate) {
+  @SuppressWarnings("Contract")
+  public static IllegalArgumentException illegalArgumentOf(
+      final @Nullable String key, final MessageTemplates.OneArgTemplate messageTemplate) {
     return exceptionOf(IllegalArgumentException.class, key, messageTemplate);
   }
 
@@ -78,10 +84,11 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null, _ -> fail; _, _, _ -> new")
-  public static @NonNull IllegalArgumentException illegalArgumentOf(
-      @Nullable final String key,
+  @SuppressWarnings("Contract")
+  public static IllegalArgumentException illegalArgumentOf(
+      final @Nullable String key,
       final MessageTemplates.TwoArgTemplate messageTemplate,
-      @Nullable final String value) {
+      final @Nullable String value) {
     return exceptionOf(IllegalArgumentException.class, key, messageTemplate, value);
   }
 
@@ -96,8 +103,9 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null -> fail; _, _ -> new")
-  public static @NonNull IllegalStateException illegalStateOf(
-      @Nullable final String key, final MessageTemplates.OneArgTemplate messageTemplate) {
+  @SuppressWarnings("Contract")
+  public static IllegalStateException illegalStateOf(
+      final @Nullable String key, final MessageTemplates.OneArgTemplate messageTemplate) {
     return exceptionOf(IllegalStateException.class, key, messageTemplate);
   }
 
@@ -113,10 +121,11 @@ public final class ExceptionFactory {
    * @since 0.1.0
    */
   @Contract("_, null, _ -> fail; _, _, _ -> new")
-  public static @NonNull IllegalStateException illegalStateOf(
-      @Nullable final String key,
+  @SuppressWarnings("Contract")
+  public static IllegalStateException illegalStateOf(
+      final @Nullable String key,
       final MessageTemplates.TwoArgTemplate messageTemplate,
-      @Nullable final String value) {
+      final @Nullable String value) {
     return exceptionOf(IllegalStateException.class, key, messageTemplate, value);
   }
 }
